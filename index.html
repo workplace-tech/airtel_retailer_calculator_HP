@@ -174,9 +174,9 @@ const tertiary=v('tertiary');
 document.getElementById('recharge').innerText=
 f(tertiary*0.03);
 
-/* MNP */
-document.getElementById('mnpVal').innerText=
-f(v('mnpCount')*110);
+// MNP (110 + 235)
+document.getElementById('mnpVal').innerText = 
+    f(v('mnp') * 110 + v('mnp') * 235);
 
 /* MNP Days */
 document.getElementById('mnpDaysVal').innerText=
@@ -190,9 +190,9 @@ f(v('gad')*115);
 document.getElementById('wifiDaysVal').innerText=
 f((tertiary*0.01*v('wifiDays'))/30);
 
-/* WiFi Lead */
-document.getElementById('wifiLeadsVal').innerText=
-f(v('wifiLeads')*150);
+// WiFi Lead (250 + 150)
+document.getElementById('wifiLeadVal').innerText = 
+    f(v('wifiLead') * 250 + v('wifiLead') * 150);
 
 /* SIM Swap */
 document.getElementById('simSwapVal').innerText=
@@ -262,3 +262,4 @@ calc();
 
 </body>
 </html>
+
