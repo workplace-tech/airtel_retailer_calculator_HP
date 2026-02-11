@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Airtel Retailer Earning Calculator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+body{font-family:Poppins;background:#f5f6fa;margin:0}
+header{background:#d32f2f;color:#fff;padding:14px;text-align:center;font-weight:700}
+.container{max-width:950px;margin:12px auto 80px;padding:12px}
+.card{background:#fff;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:12px}
+.card-header{background:#d32f2f;color:#fff;padding:10px 12px;font-weight:700}
+.card-body{padding:12px}
+.row{display:grid;grid-template-columns:50% 25% 25%;gap:10px;align-items:center;padding:6px 0}
+
+input{
+  width:100%;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  text-align:right;
+}
+
+.fake-input{
+  width:100%;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  text-align:right;
+  background:#f9f9f9;
+  font-size:14px;
+  font-weight:600;
+  color:#333;
+}
+
+.result{text-align:right;font-weight:700;color:#d32f2f}
+.summary{font-size:16px;font-weight:800}
+.controls{display:flex;gap:10px;justify-content:center;margin-top:10px}
+button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#fff;background:#d32f2f;cursor:pointer}
+.secondary{background:#777}
+.whatsapp{background:#25D366}
+</style>
+</head>
+
+<body>
+<header>Airtel Retailer – Earning Calculator</header>
+
+<div class="container">
+
+<!-- LAPU & Recharge -->
+<div class="card">
+<div class="card-header">LAPU & Recharge</div>
+<div class="card-body">
+
+<div class="row">
+  <div>LAPU Tertiary</div>
+  <input id="tertiary" type="number" oninput="calc()">
+  <div></div>
+</div>
+
+<div class="row">
+  <div>Recharge Margin (3%)</div><div></div>
+  <div class="result" id="recharge">₹0.00</div>
+</div>
+
+</div>
+</div>
+
+<!-- MNP -->
+<div class="card">
+<div class="card-header">MNP</div>
+<div class="card-body">
+
+<div class="row">
+  <div>MNP Count for the month</div>
+  <input id="mnpCount" type="number" oninput="calc()">
+  <div class="result" id="mnpIncentive">₹0.00</div>
+</div>
+
+<div class="row">
+  <div>MNP OTF (Auto)</div>
+  <div class="fake-input" id="mnpOtfCount">0</div>
+  <div class="result" id="mnpOtfVal">₹0.00</div>
+</div>
+
+<div class="row">
+  <div>MNP Participation Days</div>
+  <input id="mnpDays" type="number" oninput="calc()">
+  <div class="result" id="mnpDaysVal">₹0.00</div>
+</div>
+
+<div class="row">
+  <div>Non-MNP Count</div>
+  <input id="nonMnp" type="number" oninput="calc()">
+  <div class="result" id="nonMnpVal">₹0.00</div>
+</div>
+
+</div>
+</div>
+
+<!-- WIFI & SIM -->
+<div class="card">
+<div class="card-header">WiFi & SIM</div>
+<div class="card-body">
+
+<div class="row">
+  <div>WiFi Participation Days</div>
+  <input id="wifiDays" type="number" oninput="calc()">
+  <div class="result" id="wifiDaysVal">₹0.00</div>
+</div>
+
+<div class="row">
+  <div>WiFi Leads</div>
+  <input id="wifiLeads" type="number" oninput="calc()">
+  <div class="result" id="wifiLeadsVal">₹0.00</div>
+</div>
+
+<div class="row">
+  <div>SIM Swap Count</div>
+  <input id="simSwap" type="number" oninput="calc()">
+  <div class="result" id="simSwapVal">₹0.00</div>
+</div>
+
+</div>
+</div>
+
+<!-- UPGRADES -->
+<div class="card">
+<div class="card-header">Upgrades & Others</div>
+<div class="card-body">
+
+<div class="row">
+  <div>Recharge Upgrade to ≥399</div>
+  <input id="upgrade" type="number" oninput="calc()">
+  <div class="result" id="upgradeVal">₹0.00</div>
+</div>
+
+<div class="row">
+  <div>STAR Recharge Count</div>
+  <input id="star" type="number" oninput="calc()">
+  <div class="result" id="starVal">₹0.00</div>
+</div>
+
+<div class="row">
+  <div>SBA Opening</div>
+  <input id="sba" type="number" oninput="calc()">
+  <div class="result" id="sbaVal">₹0.00</div>
+</div>
+
+</div>
+</div>
+
+<!-- TOTAL -->
+<div class="card">
+<div class="card-body">
+<div class="row summary">
+  <div>Total Incentive</div><div></div>
+  <div class="result" id="total">₹0.00</div>
+</div>
+
+<div class="controls">
+<button class="secondary" onclick="resetAll()">Reset</button>
+<button onclick="shareTelegram()">Telegram</button>
+<button class="whatsapp" onclick="shareWhatsApp()">
+<i class="fa-brands fa-whatsapp"></i>
+</button>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+const f=n=>"₹"+n.toLocaleString('en-IN',{minimumFractionDigits:2});
+const v=id=>+document.getElementById(id).value||0;
+const mnpRate=c=>c<=6?50:c<=29?90:160;
+
+function calc(){
+const tertiary=v('tertiary');
+const lapu=tertiary/30;
+
+document.getElementById('recharge').innerText=f(tertiary*0.03);
+
+const mnpCount=v('mnpCount');
+
+const mnpInc=mnpCount*mnpRate(mnpCount);
+document.getElementById('mnpIncentive').innerText=f(mnpInc);
+
+document.getElementById('mnpOtfCount').innerText=mnpCount;
+document.getElementById('mnpOtfVal').innerText=f(mnpCount*235);
+
+document.getElementById('mnpDaysVal').innerText=f(lapu*v('mnpDays')*0.014);
+document.getElementById('nonMnpVal').innerText=f(v('nonMnp')*135);
+document.getElementById('wifiDaysVal').innerText=f(lapu*v('wifiDays')*0.015);
+document.getElementById('wifiLeadsVal').innerText=f(v('wifiLeads')*150);
+document.getElementById('simSwapVal').innerText=f(v('simSwap')*10);
+
+document.getElementById('upgradeVal').innerText=f(399*v('upgrade')*0.03);
+document.getElementById('starVal').innerText=f(v('star')*299*0.005);
+document.getElementById('sbaVal').innerText=f(v('sba')*45);
+
+const total=[
+  'recharge','mnpIncentive','mnpOtfVal','mnpDaysVal','nonMnpVal',
+  'wifiDaysVal','wifiLeadsVal','simSwapVal','upgradeVal','starVal','sbaVal'
+].map(id=>Number(document.getElementById(id).innerText.replace(/[₹,]/g,''))||0)
+.reduce((a,b)=>a+b,0);
+
+document.getElementById('total').innerText=f(total);
+}
+
+function resetAll(){
+  document.querySelectorAll('input').forEach(i=>i.value='');
+  calc();
+}
+
+function buildSummary(){
+return `AIRTEL RETAILER EARNING SUMMARY
+----------------------------------
+LAPU Tertiary : ${f(v('tertiary'))}
+Recharge Margin : ${document.getElementById('recharge').innerText}
+
+MNP Count : ${v('mnpCount')}
+MNP Incentive : ${document.getElementById('mnpIncentive').innerText}
+MNP OTF : ${document.getElementById('mnpOtfVal').innerText}
+
+WiFi Days : ${document.getElementById('wifiDaysVal').innerText}
+WiFi Leads : ${document.getElementById('wifiLeadsVal').innerText}
+SIM Swap : ${document.getElementById('simSwapVal').innerText}
+
+Recharge Upgrade ≥399 : ${document.getElementById('upgradeVal').innerText}
+STAR Recharge : ${document.getElementById('starVal').innerText}
+SBA Opening : ${document.getElementById('sbaVal').innerText}
+
+TOTAL INCENTIVE : ${document.getElementById('total').innerText}`;
+}
+
+function shareTelegram(){
+window.open("https://t.me/share/url?text="+encodeURIComponent(buildSummary()),"_blank");
+}
+function shareWhatsApp(){
+window.open("https://wa.me/?text="+encodeURIComponent(buildSummary()),"_blank");
+}
+
+calc();
+</script>
+</body>
+</html>
+
