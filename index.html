@@ -18,9 +18,9 @@ header{background:#d32f2f;color:#fff;padding:14px;text-align:center;font-weight:
 input{width:100%;padding:8px;border-radius:8px;border:1px solid #ccc;text-align:right}
 .result{text-align:right;font-weight:700;color:#d32f2f}
 .summary{font-size:16px;font-weight:800}
-.controls{display:flex;gap:10px;justify-content:center;margin-top:10px}
-button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#fff;background:#d32f2f;cursor:pointer}
-.secondary{background:#777}
+.controls{display:flex;gap:10px;justify-content:center;margin-top:15px}
+button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#fff;cursor:pointer}
+.telegram{background:#0088cc}
 .whatsapp{background:#25D366}
 </style>
 </head>
@@ -34,13 +34,11 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 <div class="card">
 <div class="card-header">LAPU</div>
 <div class="card-body">
-
 <div class="row">
 <div>LAPU Tertiary</div>
 <input id="tertiary" type="number" oninput="calc()">
 <div class="result" id="lapuVal">₹0.00</div>
 </div>
-
 </div>
 </div>
 
@@ -48,19 +46,16 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 <div class="card">
 <div class="card-header">MNP</div>
 <div class="card-body">
-
 <div class="row">
 <div>MNP Count</div>
 <input id="mnp" type="number" oninput="calc()">
 <div class="result" id="mnpVal">₹0.00</div>
 </div>
-
 <div class="row">
 <div>MNP Days</div>
 <input id="mnpDays" type="number" oninput="calc()">
 <div class="result" id="mnpDaysVal">₹0.00</div>
 </div>
-
 </div>
 </div>
 
@@ -68,19 +63,16 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 <div class="card">
 <div class="card-header">WiFi</div>
 <div class="card-body">
-
 <div class="row">
 <div>WiFi Days</div>
 <input id="wifiDays" type="number" oninput="calc()">
 <div class="result" id="wifiDaysVal">₹0.00</div>
 </div>
-
 <div class="row">
 <div>WiFi Lead</div>
 <input id="wifiLead" type="number" oninput="calc()">
 <div class="result" id="wifiLeadVal">₹0.00</div>
 </div>
-
 </div>
 </div>
 
@@ -129,6 +121,12 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 <div>Total Incentive</div><div></div>
 <div class="result" id="total">₹0.00</div>
 </div>
+
+<div class="controls">
+<button class="telegram" onclick="shareTelegram()">Share Telegram</button>
+<button class="whatsapp" onclick="shareWhatsApp()">Share WhatsApp</button>
+</div>
+
 </div>
 </div>
 
@@ -143,34 +141,15 @@ function calc(){
 const tertiary=v('tertiary');
 const lapuFactor=(tertiary*0.01)/30;
 
-// ✅ LAPU = 3%
 document.getElementById('lapuVal').innerText=f(tertiary*0.03);
-
-// MNP (110 + 235)
 document.getElementById('mnpVal').innerText=f(v('mnp')*345);
-
-// MNP Days
 document.getElementById('mnpDaysVal').innerText=f(lapuFactor*v('mnpDays'));
-
-// WiFi Days
 document.getElementById('wifiDaysVal').innerText=f(lapuFactor*v('wifiDays'));
-
-// WiFi Lead (250 + 150)
 document.getElementById('wifiLeadVal').innerText=f(v('wifiLead')*400);
-
-// SIM Swap
-document.getElementById('simSwapVal').innerText=f(v('simSwap')*100);
-
-// Upgrade 349
+document.getElementById('simSwapVal').innerText=f(v('simSwap')*10);
 document.getElementById('upgradeVal').innerText=f(v('upgrade')*12);
-
-// STAR Winback = 3% of input
 document.getElementById('starVal').innerText=f(v('star')*0.03);
-
-// ✅ Payment Bank AC
 document.getElementById('pbaVal').innerText=f(v('pba')*45);
-
-// GAD
 document.getElementById('gadVal').innerText=f(v('gad')*115);
 
 const total=[
@@ -180,6 +159,34 @@ const total=[
 .reduce((a,b)=>a+b,0);
 
 document.getElementById('total').innerText=f(total);
+}
+
+function buildMessage(){
+
+return `📊 Airtel Retailer – Earning Calculator HP
+
+LAPU Incentive: ${lapuVal.innerText}
+MNP: ${mnpVal.innerText}
+MNP Days: ${mnpDaysVal.innerText}
+WiFi Days: ${wifiDaysVal.innerText}
+WiFi Lead: ${wifiLeadVal.innerText}
+SIM Swap: ${simSwapVal.innerText}
+Upgrade 349: ${upgradeVal.innerText}
+STAR Winback: ${starVal.innerText}
+Payment Bank AC: ${pbaVal.innerText}
+GAD: ${gadVal.innerText}
+
+💰 Total Incentive: ${total.innerText}`;
+}
+
+function shareWhatsApp(){
+let url="https://wa.me/?text="+encodeURIComponent(buildMessage());
+window.open(url,"_blank");
+}
+
+function shareTelegram(){
+let url="https://t.me/share/url?url=&text="+encodeURIComponent(buildMessage());
+window.open(url,"_blank");
 }
 
 calc();
