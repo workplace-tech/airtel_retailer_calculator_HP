@@ -23,17 +23,6 @@ input{
   border:1px solid #ccc;
   text-align:right;
 }
-.fake-input{
-  width:100%;
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  text-align:right;
-  background:#f9f9f9;
-  font-size:14px;
-  font-weight:600;
-  color:#333;
-}
 .result{text-align:right;font-weight:700;color:#d32f2f}
 .summary{font-size:16px;font-weight:800}
 .controls{display:flex;gap:10px;justify-content:center;margin-top:10px}
@@ -68,37 +57,25 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 </div>
 </div>
 
-<!-- MNP -->
+<!-- MNP & GAD -->
 <div class="card">
-<div class="card-header">MNP</div>
+<div class="card-header">MNP & GAD</div>
 <div class="card-body">
 
 <div class="row">
-  <div>MNP Count</div>
+  <div>MNP</div>
   <input id="mnpCount" type="number" oninput="calc()">
-  <div></div>
+  <div class="result" id="mnpVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>MNP OTF</div>
-  <div class="fake-input" id="mnpOtfCount">0</div>
-  <div class="result" id="mnpOtfVal">₹0.00</div>
-</div>
-
-<div class="row">
-  <div>MNP Scheme</div>
-  <div></div>
-  <div class="result" id="mnpSchemeVal">₹0.00</div>
-</div>
-
-<div class="row">
-  <div>MNP Participation Days</div>
+  <div>MNP Days</div>
   <input id="mnpDays" type="number" oninput="calc()">
   <div class="result" id="mnpDaysVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>GAD Count</div>
+  <div>GAD</div>
   <input id="gad" type="number" oninput="calc()">
   <div class="result" id="gadVal">₹0.00</div>
 </div>
@@ -108,31 +85,19 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 
 <!-- WIFI -->
 <div class="card">
-<div class="card-header">WiFi & SIM</div>
+<div class="card-header">WiFi</div>
 <div class="card-body">
 
 <div class="row">
-  <div>WiFi Participation Days</div>
+  <div>WiFi Days</div>
   <input id="wifiDays" type="number" oninput="calc()">
   <div class="result" id="wifiDaysVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>WiFi Leads (OTF)</div>
+  <div>WiFi Lead</div>
   <input id="wifiLeads" type="number" oninput="calc()">
   <div class="result" id="wifiLeadsVal">₹0.00</div>
-</div>
-
-<div class="row">
-  <div>WiFi Scheme</div>
-  <div></div>
-  <div class="result" id="wifiSchemeVal">₹0.00</div>
-</div>
-
-<div class="row">
-  <div>SIM Swap Count</div>
-  <input id="simSwap" type="number" oninput="calc()">
-  <div class="result" id="simSwapVal">₹0.00</div>
 </div>
 
 </div>
@@ -140,8 +105,14 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 
 <!-- OTHERS -->
 <div class="card">
-<div class="card-header">Upgrades & Others</div>
+<div class="card-header">Others</div>
 <div class="card-body">
+
+<div class="row">
+  <div>SIM Swap Count</div>
+  <input id="simSwap" type="number" oninput="calc()">
+  <div class="result" id="simSwapVal">₹0.00</div>
+</div>
 
 <div class="row">
   <div>Upgrade 349</div>
@@ -198,50 +169,57 @@ const v=id=>+document.getElementById(id).value||0;
 function calc(){
 
 const tertiary=v('tertiary');
-const lapu=tertiary/30;
 
-document.getElementById('recharge').innerText=f(tertiary*0.03);
+/* Recharge */
+document.getElementById('recharge').innerText=
+f(tertiary*0.03);
 
-const mnpCount=v('mnpCount');
+/* MNP */
+document.getElementById('mnpVal').innerText=
+f(v('mnpCount')*110);
 
-document.getElementById('mnpOtfCount').innerText=mnpCount;
-document.getElementById('mnpOtfVal').innerText=f(mnpCount*235);
-document.getElementById('mnpSchemeVal').innerText=f(mnpCount*110);
-
+/* MNP Days */
 document.getElementById('mnpDaysVal').innerText=
-f(lapu*v('mnpDays')*0.01);
+f((tertiary*0.01*v('mnpDays'))/30);
 
+/* GAD */
 document.getElementById('gadVal').innerText=
 f(v('gad')*115);
 
+/* WiFi Days */
 document.getElementById('wifiDaysVal').innerText=
-f(lapu*v('wifiDays')*0.01);
+f((tertiary*0.01*v('wifiDays'))/30);
 
-const wifiLeads=v('wifiLeads');
+/* WiFi Lead */
 document.getElementById('wifiLeadsVal').innerText=
-f(wifiLeads*150);
-document.getElementById('wifiSchemeVal').innerText=
-f(wifiLeads*250);
+f(v('wifiLeads')*150);
 
+/* SIM Swap */
 document.getElementById('simSwapVal').innerText=
 f(v('simSwap')*100);
 
+/* Upgrade 349 */
 document.getElementById('upgrade349Val').innerText=
 f(v('upgrade349')*12);
 
+/* STAR */
 document.getElementById('starVal').innerText=
 f(v('star')*0.03);
 
+/* Payment Bank */
 document.getElementById('sbaVal').innerText=
 f(v('sba')*45);
 
+/* Free Demo */
 document.getElementById('freeDemoVal').innerText=
 f(v('freeDemo')*349);
 
+/* TOTAL */
 const total=[
-'recharge','mnpOtfVal','mnpSchemeVal','mnpDaysVal','gadVal',
-'wifiDaysVal','wifiLeadsVal','wifiSchemeVal','simSwapVal',
-'upgrade349Val','starVal','sbaVal','freeDemoVal'
+'recharge','mnpVal','mnpDaysVal','gadVal',
+'wifiDaysVal','wifiLeadsVal',
+'simSwapVal','upgrade349Val',
+'starVal','sbaVal','freeDemoVal'
 ].map(id=>Number(document.getElementById(id).innerText.replace(/[₹,]/g,''))||0)
 .reduce((a,b)=>a+b,0);
 
@@ -258,19 +236,16 @@ return `AIRTEL RETAILER EARNING SUMMARY - HP
 ----------------------------------
 LAPU : ${f(v('tertiary'))}
 Recharge : ${document.getElementById('recharge').innerText}
-
-MNP OTF : ${document.getElementById('mnpOtfVal').innerText}
-MNP Scheme : ${document.getElementById('mnpSchemeVal').innerText}
+MNP : ${document.getElementById('mnpVal').innerText}
+MNP Days : ${document.getElementById('mnpDaysVal').innerText}
 GAD : ${document.getElementById('gadVal').innerText}
-
-WiFi OTF : ${document.getElementById('wifiLeadsVal').innerText}
-WiFi Scheme : ${document.getElementById('wifiSchemeVal').innerText}
-
+WiFi Days : ${document.getElementById('wifiDaysVal').innerText}
+WiFi Lead : ${document.getElementById('wifiLeadsVal').innerText}
+SIM Swap : ${document.getElementById('simSwapVal').innerText}
 Upgrade 349 : ${document.getElementById('upgrade349Val').innerText}
 STAR : ${document.getElementById('starVal').innerText}
 Payment Bank : ${document.getElementById('sbaVal').innerText}
 Free Demo : ${document.getElementById('freeDemoVal').innerText}
-
 TOTAL : ${document.getElementById('total').innerText}`;
 }
 
