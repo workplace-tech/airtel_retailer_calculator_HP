@@ -24,6 +24,18 @@ input{
   text-align:right;
 }
 
+.fake-input{
+  width:100%;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  text-align:right;
+  background:#f9f9f9;
+  font-size:14px;
+  font-weight:600;
+  color:#333;
+}
+
 .result{text-align:right;font-weight:700;color:#d32f2f}
 .summary{font-size:16px;font-weight:800}
 .controls{display:flex;gap:10px;justify-content:center;margin-top:10px}
@@ -123,7 +135,6 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 <button onclick="shareTelegram()">Telegram</button>
 <button class="whatsapp" onclick="shareWhatsApp()">WhatsApp</button>
 </div>
-
 </div>
 </div>
 
@@ -136,24 +147,24 @@ const v=id=>+document.getElementById(id).value||0;
 function calc(){
 
 const tertiary=v('tertiary');
-const lapuFactor = (tertiary * 0.01) / 30;
+const lapuFactor=(tertiary*0.01)/30;
 
-// SIM Swap (₹10 each assumed)
+// SIM Swap
 document.getElementById('simSwapVal').innerText=f(v('simSwap')*10);
 
 // Upgrade 349 @3%
 document.getElementById('upgradeVal').innerText=f(v('upgrade')*349*0.03);
 
-// STAR Winback @3% of 299
-document.getElementById('starVal').innerText=f(v('star')*299*0.03);
+// ⭐ STAR Winback (original correct logic)
+document.getElementById('starVal').innerText=f(v('star')*299*0.005);
 
-// Payment Bank AC (₹45 assumed)
+// Payment Bank AC
 document.getElementById('pbaVal').innerText=f(v('pba')*45);
 
-// Free Demo (₹10 assumed)
+// Free Demo
 document.getElementById('demoVal').innerText=f(v('demo')*10);
 
-// ✅ MNP = 110 + 235
+// ✅ MNP (110 + 235)
 document.getElementById('mnpVal').innerText=f(v('mnp')*345);
 
 // ✅ MNP Days
@@ -165,7 +176,7 @@ document.getElementById('wifiDaysVal').innerText=f(lapuFactor*v('wifiDays'));
 // ✅ GAD
 document.getElementById('gadVal').innerText=f(v('gad')*115);
 
-// ✅ WiFi Lead = 250 + 150
+// ✅ WiFi Lead (250 + 150)
 document.getElementById('wifiLeadVal').innerText=f(v('wifiLead')*400);
 
 const total=[
