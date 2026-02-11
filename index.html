@@ -15,27 +15,7 @@ header{background:#d32f2f;color:#fff;padding:14px;text-align:center;font-weight:
 .card-header{background:#d32f2f;color:#fff;padding:10px 12px;font-weight:700}
 .card-body{padding:12px}
 .row{display:grid;grid-template-columns:50% 25% 25%;gap:10px;align-items:center;padding:6px 0}
-
-input{
-  width:100%;
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  text-align:right;
-}
-
-.fake-input{
-  width:100%;
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  text-align:right;
-  background:#f9f9f9;
-  font-size:14px;
-  font-weight:600;
-  color:#333;
-}
-
+input{width:100%;padding:8px;border-radius:8px;border:1px solid #ccc;text-align:right}
 .result{text-align:right;font-weight:700;color:#d32f2f}
 .summary{font-size:16px;font-weight:800}
 .controls{display:flex;gap:10px;justify-content:center;margin-top:10px}
@@ -50,90 +30,104 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 
 <div class="container">
 
+<!-- LAPU -->
 <div class="card">
-<div class="card-header">HP Incentive Components</div>
+<div class="card-header">LAPU</div>
 <div class="card-body">
 
 <div class="row">
-  <div>LAPU Tertiary</div>
-  <input id="tertiary" type="number" oninput="calc()">
-  <div></div>
+<div>LAPU Tertiary</div>
+<input id="tertiary" type="number" oninput="calc()">
+<div class="result" id="lapuVal">₹0.00</div>
+</div>
+
+</div>
+</div>
+
+<!-- MNP -->
+<div class="card">
+<div class="card-header">MNP</div>
+<div class="card-body">
+
+<div class="row">
+<div>MNP Count</div>
+<input id="mnp" type="number" oninput="calc()">
+<div class="result" id="mnpVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>SIM Swap Count</div>
-  <input id="simSwap" type="number" oninput="calc()">
-  <div class="result" id="simSwapVal">₹0.00</div>
+<div>MNP Days</div>
+<input id="mnpDays" type="number" oninput="calc()">
+<div class="result" id="mnpDaysVal">₹0.00</div>
+</div>
+
+</div>
+</div>
+
+<!-- WIFI -->
+<div class="card">
+<div class="card-header">WiFi</div>
+<div class="card-body">
+
+<div class="row">
+<div>WiFi Days</div>
+<input id="wifiDays" type="number" oninput="calc()">
+<div class="result" id="wifiDaysVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>Upgrade 349</div>
-  <input id="upgrade" type="number" oninput="calc()">
-  <div class="result" id="upgradeVal">₹0.00</div>
+<div>WiFi Lead</div>
+<input id="wifiLead" type="number" oninput="calc()">
+<div class="result" id="wifiLeadVal">₹0.00</div>
+</div>
+
+</div>
+</div>
+
+<!-- OTHER -->
+<div class="card">
+<div class="card-header">Other Components</div>
+<div class="card-body">
+
+<div class="row">
+<div>SIM Swap Count</div>
+<input id="simSwap" type="number" oninput="calc()">
+<div class="result" id="simSwapVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>STAR Winback (3%)</div>
-  <input id="star" type="number" oninput="calc()">
-  <div class="result" id="starVal">₹0.00</div>
+<div>Upgrade 349</div>
+<input id="upgrade" type="number" oninput="calc()">
+<div class="result" id="upgradeVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>Payment Bank AC</div>
-  <input id="pba" type="number" oninput="calc()">
-  <div class="result" id="pbaVal">₹0.00</div>
+<div>STAR Winback</div>
+<input id="star" type="number" oninput="calc()">
+<div class="result" id="starVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>Free Demo</div>
-  <input id="demo" type="number" oninput="calc()">
-  <div class="result" id="demoVal">₹0.00</div>
+<div>Payment Bank AC</div>
+<input id="pba" type="number" oninput="calc()">
+<div class="result" id="pbaVal">₹0.00</div>
 </div>
 
 <div class="row">
-  <div>MNP Count</div>
-  <input id="mnp" type="number" oninput="calc()">
-  <div class="result" id="mnpVal">₹0.00</div>
-</div>
-
-<div class="row">
-  <div>MNP Days</div>
-  <input id="mnpDays" type="number" oninput="calc()">
-  <div class="result" id="mnpDaysVal">₹0.00</div>
-</div>
-
-<div class="row">
-  <div>WiFi Days</div>
-  <input id="wifiDays" type="number" oninput="calc()">
-  <div class="result" id="wifiDaysVal">₹0.00</div>
-</div>
-
-<div class="row">
-  <div>GAD</div>
-  <input id="gad" type="number" oninput="calc()">
-  <div class="result" id="gadVal">₹0.00</div>
-</div>
-
-<div class="row">
-  <div>WiFi Lead</div>
-  <input id="wifiLead" type="number" oninput="calc()">
-  <div class="result" id="wifiLeadVal">₹0.00</div>
+<div>GAD</div>
+<input id="gad" type="number" oninput="calc()">
+<div class="result" id="gadVal">₹0.00</div>
 </div>
 
 </div>
 </div>
 
+<!-- TOTAL -->
 <div class="card">
 <div class="card-body">
 <div class="row summary">
-  <div>Total Incentive</div><div></div>
-  <div class="result" id="total">₹0.00</div>
-</div>
-
-<div class="controls">
-<button class="secondary" onclick="resetAll()">Reset</button>
-<button onclick="shareTelegram()">Telegram</button>
-<button class="whatsapp" onclick="shareWhatsApp()">WhatsApp</button>
+<div>Total Incentive</div><div></div>
+<div class="result" id="total">₹0.00</div>
 </div>
 </div>
 </div>
@@ -149,61 +143,43 @@ function calc(){
 const tertiary=v('tertiary');
 const lapuFactor=(tertiary*0.01)/30;
 
-// SIM Swap
-document.getElementById('simSwapVal').innerText=f(v('simSwap')*10);
+// ✅ LAPU = 3%
+document.getElementById('lapuVal').innerText=f(tertiary*0.03);
 
-// Upgrade 349 @3%
-document.getElementById('upgradeVal').innerText=f(v('upgrade')*349*0.03);
-
-// ⭐ STAR Winback (original correct logic)
-document.getElementById('starVal').innerText=f(v('star')*299*0.005);
-
-// Payment Bank AC
-document.getElementById('pbaVal').innerText=f(v('pba')*45);
-
-// Free Demo
-document.getElementById('demoVal').innerText=f(v('demo')*10);
-
-// ✅ MNP (110 + 235)
+// MNP (110 + 235)
 document.getElementById('mnpVal').innerText=f(v('mnp')*345);
 
-// ✅ MNP Days
+// MNP Days
 document.getElementById('mnpDaysVal').innerText=f(lapuFactor*v('mnpDays'));
 
-// ✅ WiFi Days
+// WiFi Days
 document.getElementById('wifiDaysVal').innerText=f(lapuFactor*v('wifiDays'));
 
-// ✅ GAD
-document.getElementById('gadVal').innerText=f(v('gad')*115);
-
-// ✅ WiFi Lead (250 + 150)
+// WiFi Lead (250 + 150)
 document.getElementById('wifiLeadVal').innerText=f(v('wifiLead')*400);
 
+// SIM Swap
+document.getElementById('simSwapVal').innerText=f(v('simSwap')*100);
+
+// Upgrade 349
+document.getElementById('upgradeVal').innerText=f(v('upgrade')*12);
+
+// STAR Winback = 3% of input
+document.getElementById('starVal').innerText=f(v('star')*0.03);
+
+// ✅ Payment Bank AC
+document.getElementById('pbaVal').innerText=f(v('pba')*45);
+
+// GAD
+document.getElementById('gadVal').innerText=f(v('gad')*115);
+
 const total=[
-'simSwapVal','upgradeVal','starVal','pbaVal','demoVal',
-'mnpVal','mnpDaysVal','wifiDaysVal','gadVal','wifiLeadVal'
+'lapuVal','mnpVal','mnpDaysVal','wifiDaysVal','wifiLeadVal',
+'simSwapVal','upgradeVal','starVal','pbaVal','gadVal'
 ].map(id=>Number(document.getElementById(id).innerText.replace(/[₹,]/g,''))||0)
 .reduce((a,b)=>a+b,0);
 
 document.getElementById('total').innerText=f(total);
-}
-
-function resetAll(){
-document.querySelectorAll('input').forEach(i=>i.value='');
-calc();
-}
-
-function buildSummary(){
-return `AIRTEL RETAILER HP SUMMARY
-----------------------------------
-TOTAL INCENTIVE : ${document.getElementById('total').innerText}`;
-}
-
-function shareTelegram(){
-window.open("https://t.me/share/url?text="+encodeURIComponent(buildSummary()),"_blank");
-}
-function shareWhatsApp(){
-window.open("https://wa.me/?text="+encodeURIComponent(buildSummary()),"_blank");
 }
 
 calc();
