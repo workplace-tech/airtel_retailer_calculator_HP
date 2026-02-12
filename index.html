@@ -140,11 +140,12 @@ function calc(){
 
 const tertiary=v('tertiary');
 const lapuFactor=(tertiary*0.01)/30;
+const wifiFactor = (tertiary * 0.015) / 30;
 
 document.getElementById('lapuVal').innerText=f(tertiary*0.03);
 document.getElementById('mnpVal').innerText=f(v('mnp')*345);
 document.getElementById('mnpDaysVal').innerText=f(lapuFactor*v('mnpDays'));
-document.getElementById('wifiDaysVal').innerText=f(lapuFactor*v('wifiDays'));
+document.getElementById('wifiDaysVal').innerText = f(wifiFactor * v('wifiDays'));
 document.getElementById('wifiLeadVal').innerText=f(v('wifiLead')*400);
 document.getElementById('simSwapVal').innerText=f(v('simSwap')*100);
 document.getElementById('upgradeVal').innerText=f(v('upgrade')*12);
@@ -194,4 +195,5 @@ calc();
 
 </body>
 </html>
+
 
