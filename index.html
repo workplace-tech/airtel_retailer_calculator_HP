@@ -117,9 +117,20 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 <!-- TOTAL -->
 <div class="card">
 <div class="card-body">
+
 <div class="row summary">
 <div>Total Incentive</div><div></div>
 <div class="result" id="total">₹0.00</div>
+</div>
+
+<div class="row summary">
+<div>You Invested</div><div></div>
+<div class="result" id="invested">₹0.00</div>
+</div>
+
+<div class="row summary">
+<div>Return on Investment</div><div></div>
+<div class="result" id="roi">0.00%</div>
 </div>
 
 <div class="controls">
@@ -160,10 +171,17 @@ const total=[
 .reduce((a,b)=>a+b,0);
 
 document.getElementById('total').innerText=f(total);
+
+// You Invested = LAPU Tertiary / 30
+const invested = tertiary / 30;
+document.getElementById('invested').innerText = f(invested);
+
+// ROI %
+const roi = invested > 0 ? (total / invested) * 100 : 0;
+document.getElementById('roi').innerText = roi.toFixed(2) + "%";
 }
 
 function buildMessage(){
-
 return `📊 Airtel Retailer – Earning Calculator HP
 
 LAPU Incentive: ${lapuVal.innerText}
@@ -177,7 +195,9 @@ STAR Winback: ${starVal.innerText}
 Payment Bank AC: ${pbaVal.innerText}
 GAD: ${gadVal.innerText}
 
-💰 Total Incentive: ${total.innerText}`;
+💰 Total Incentive: ${total.innerText}
+💼 You Invested: ${invested.innerText}
+📈 ROI: ${roi.innerText}`;
 }
 
 function shareWhatsApp(){
@@ -195,6 +215,3 @@ calc();
 
 </body>
 </html>
-
-
-
