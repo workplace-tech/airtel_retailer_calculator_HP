@@ -150,7 +150,7 @@ const v=id=>+document.getElementById(id).value||0;
 function calc(){
 
 const tertiary=v('tertiary');
-const lapuFactor=(tertiary*0.01)/30;
+const lapuFactor=(tertiary*0.014)/30;
 const wifiFactor = (tertiary * 0.015) / 30;
 
 document.getElementById('lapuVal').innerText=f(tertiary*0.03);
@@ -215,3 +215,4 @@ calc();
 
 </body>
 </html>
+
