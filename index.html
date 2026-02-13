@@ -111,6 +111,12 @@ button{border:none;border-radius:10px;padding:10px 16px;font-weight:700;color:#f
 <div class="result" id="gadVal">₹0.00</div>
 </div>
 
+<div class="row">
+<div>Free Demo Plan</div>
+<input id="freeDemo" type="number" oninput="calc()">
+<div class="result" id="freeDemoVal">₹0.00</div>
+</div>
+
 </div>
 </div>
 
@@ -150,35 +156,41 @@ const v=id=>+document.getElementById(id).value||0;
 function calc(){
 
 const tertiary=v('tertiary');
-const lapuFactor=(tertiary*0.014)/30;
-const wifiFactor = (tertiary * 0.015) / 30;
 
-document.getElementById('lapuVal').innerText=f(tertiary*0.03);
-document.getElementById('mnpVal').innerText=f(v('mnp')*345);
-document.getElementById('mnpDaysVal').innerText=f(lapuFactor*v('mnpDays'));
-document.getElementById('wifiDaysVal').innerText = f(wifiFactor * v('wifiDays'));
-document.getElementById('wifiLeadVal').innerText=f(v('wifiLead')*400);
-document.getElementById('simSwapVal').innerText=f(v('simSwap')*100);
-document.getElementById('upgradeVal').innerText=f(v('upgrade')*12);
-document.getElementById('starVal').innerText=f(v('star')*1.8);
-document.getElementById('pbaVal').innerText=f(v('pba')*45);
-document.getElementById('gadVal').innerText=f(v('gad')*135);
+const lapu=tertiary*0.03;
+const mnp=v('mnp')*345;
+const mnpDays=((tertiary*0.014)/30)*v('mnpDays');   // UPDATED TO 1.4%
+const wifiDays=((tertiary*0.015)/30)*v('wifiDays');
+const wifiLead=v('wifiLead')*400;
+const simSwap=v('simSwap')*100;
+const upgrade=v('upgrade')*12;
+const star=v('star')*1.8;
+const pba=v('pba')*45;
+const gad=v('gad')*135;
+const freeDemo=v('freeDemo')*349;
 
-const total=[
-'lapuVal','mnpVal','mnpDaysVal','wifiDaysVal','wifiLeadVal',
-'simSwapVal','upgradeVal','starVal','pbaVal','gadVal'
-].map(id=>Number(document.getElementById(id).innerText.replace(/[₹,]/g,''))||0)
-.reduce((a,b)=>a+b,0);
+lapuVal.innerText=f(lapu);
+mnpVal.innerText=f(mnp);
+mnpDaysVal.innerText=f(mnpDays);
+wifiDaysVal.innerText=f(wifiDays);
+wifiLeadVal.innerText=f(wifiLead);
+simSwapVal.innerText=f(simSwap);
+upgradeVal.innerText=f(upgrade);
+starVal.innerText=f(star);
+pbaVal.innerText=f(pba);
+gadVal.innerText=f(gad);
+freeDemoVal.innerText=f(freeDemo);
+
+const total=lapu+mnp+mnpDays+wifiDays+wifiLead+
+simSwap+upgrade+star+pba+gad+freeDemo;
 
 document.getElementById('total').innerText=f(total);
 
-// You Invested = LAPU Tertiary / 30
-const invested = tertiary / 30;
-document.getElementById('invested').innerText = f(invested);
+const invested=tertiary/30;
+document.getElementById('invested').innerText=f(invested);
 
-// ROI %
-const roi = invested > 0 ? (total / invested) * 100 : 0;
-document.getElementById('roi').innerText = roi.toFixed(2) + "%";
+const roi=invested>0?(total/invested)*100:0;
+document.getElementById('roi').innerText=roi.toFixed(2)+"%";
 }
 
 function buildMessage(){
@@ -194,6 +206,7 @@ Upgrade 349: ${upgradeVal.innerText}
 STAR Winback: ${starVal.innerText}
 Payment Bank AC: ${pbaVal.innerText}
 GAD: ${gadVal.innerText}
+Free Demo Plan: ${freeDemoVal.innerText}
 
 💰 Total Incentive: ${total.innerText}
 💼 You Invested: ${invested.innerText}
@@ -215,5 +228,3 @@ calc();
 
 </body>
 </html>
-
-
